@@ -10,20 +10,41 @@ package kata4;
  * @author Laura
  */
 import kata4.Histogram;
+import kata4.Mail;
 import view.HistogramDisplay;
 import view.MailHistogramBuilder;
 import view.MailListReader;
+import java.util.List;
 
 public class Kata4 {
 
-    /**
-     * @param args the command line arguments
-     */
+    private String fileName;
+    private List<Mail> mailList;
+    private Histogram<String> histogram;
+    private HistogramDisplay histogramDisplay;
+    
     public static void main(String[] args) {
-        String fileName = "emails.txt";
-        Histogram<String> histogram = MailHistogramBuilder.build(MailListReader.read(fileName));
-        HistogramDisplay histoDisplay = new HistogramDisplay(histogram);
-        histoDisplay.execute();
+        Kata4 kata = new Kata4();
+        kata.execute();
     }
     
+    private void execute(){
+        input();
+        proccess();
+        output();
+    }
+    
+    private void input(){
+        fileName = "emails.txt";
+        mailList = MailListReader.read(fileName);
+    }
+    
+    private void proccess(){
+        histogram = MailHistogramBuilder.build(mailList);
+    }
+    
+    private void output(){
+        histogramDisplay = new HistogramDisplay(histogram);
+        histogramDisplay.execute();
+    }
 }
